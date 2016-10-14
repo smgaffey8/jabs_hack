@@ -5,15 +5,22 @@
             World Pesticides
         </title>
         <meta charset="utf-8">
-    
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
         <script src="main.js"></script>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+               <div id="regions_div" style="width: 900px; height: 500px;"></div>
+        <script type="text/javascript" src="main.js">
+
+        </script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="/maps/documentation/javascript/demos/demos.css">
 
-    
+
         <!--When creating multiple angular files, make sure that the module is included FIRST-->
 
 
@@ -23,7 +30,7 @@
             <h1>Interactive Map of Pesiticide Usage in the World</h1>
             <div>{{map.greeting}}</div>
             <ng-view>
-                
+
             </ng-view>
         </div>
 
