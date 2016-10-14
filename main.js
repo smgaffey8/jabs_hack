@@ -1,14 +1,32 @@
-angular.module('pestMap', []);
-angular.module('pestMap')
-    .controller('Mapping', mapping);
+var app = angular.module('pestMap', ['ngRoute']);
+app.factory("sharedData", sharedDataFact);
+app.controller('Mapping', mapping);
+app.config(Router);
+app.controller('countryCtrl', countryController);
+
+countryController.$inject = ["$http"];
+Router.$inject = ['$routeProvider'];
+
+
+    function Router ($routeProvider){
+      $routeProvider
+        .when("/year", {
+          templateUrl: "/map1.html"
+        })
+        .otherwise({
+          redirectTo:"/year"
+        });
+        // sharedData.year = year;
+    }
 
 console.log('test');
-mapping.$inject = ['$timeout']
+mapping.$inject = ['$timeout', 'sharedData'];
 
-function mapping($timeout){
+function mapping($timeout, sharedData){
     console.log('testing');
     var map = this;
     map.greeting = 'This will be the map injection!';
+    map.years = ['1902', '1903', '1957', '1905', '1958'];
 };
 
 // function initMap() {
@@ -20,6 +38,11 @@ function mapping($timeout){
 //         });
 //       }
 
+function sharedDataFact(){
+  console.log("enter shared data");
+  var year = {};
+  return {year};
+}
 
 google.charts.load('upcoming', {'packages':['geochart']});
      google.charts.setOnLoadCallback(drawRegionsMap);
@@ -42,3 +65,20 @@ google.charts.load('upcoming', {'packages':['geochart']});
 
        chart.draw(data, options);
      }
+console.log("bye");
+function countryController ($http){
+  console.log("hello");
+  var cnt= this;
+  cnt.stuff = {};
+  cnt.getInfo = function getInfo($http) {
+    $http.get('http://api.population.io:80/1.0/countries')
+    .then(function success(res){
+      console.log('success', res);
+    },
+    function failure(res){
+      console.log('error', res);
+    });
+  }
+  cnt.getInfo($http);
+
+}
